@@ -1,3 +1,11 @@
+In this assignment, you will set up OCaml and compile & run a small
+project. There are two options for installing OCaml covered here:
+
+- Using it on the lab computers (much simpler)
+- Installing it on your computer (takes a bit more but you can use your favorite
+  text editor, etc. easily)
+
+
 # Setting up OCaml on the lab computers
 
 OCaml is already installed on the lab computers. You only need to add these two
@@ -27,7 +35,8 @@ utop #
 └───┴─────┴───────────┴──────────────┴──────┴────────┴────┴──────┴─────┴───────┘
 ```
 
-Contact me if you are having trouble with this step.
+Contact me if you are having trouble with this step. If everything worked out so
+far, please go to the section _"Testing if `dune` works"_.
 
 # Installing OCaml on your computer
 
@@ -43,7 +52,8 @@ Subsystem for Linux (WSL). If you are not sure how to use it, contact me.
 
 ## Installing `opam`
 
-Please follow the instructions [here](https://opam.ocaml.org/doc/Install.html) on how to install `opam` for your OS.
+Please follow the instructions [here](https://opam.ocaml.org/doc/Install.html)
+on how to install `opam` for your OS.
 
 - If you are using WSL, then you can follow the instructions for Ubuntu or the
   binary distribution.
@@ -70,25 +80,29 @@ The command above will ask you a yes-no question, you should answer yes,
 otherwise you will need to type the next command every single time (as opposed
 to only once) to tell your shell where the OCaml stuff is.
 
-After `opam init` is done, type the following command so you can have the OCaml tools in your current shell session:
+After `opam init` is done, type the following command so you can have the OCaml
+tools in your current shell session:
 
 ```
 eval $(opam env)
 ```
 
-Now, you are ready to install OCaml. Use the following command to install a version of OCaml (called a switch by `opam`):
+Now, you are ready to install OCaml. Use the following command to install a
+version of OCaml (called a switch by `opam`):
 
 ```
 opam switch create 4.14.0
 ```
 
-After the command above is done, you need to tell your shell where OCaml is again:
+After the command above is done, you need to tell your shell where OCaml is
+again:
 
 ```
 eval `opam env`
 ```
 
-At this point, if everything went well, when you type `ocaml`, you should see a prompt like this when you type `ocaml`:
+At this point, if everything went well, when you type `ocaml`, you should see a
+prompt like this when you type `ocaml`:
 
 ```
 % ocaml
@@ -114,23 +128,24 @@ Then `utop` should be available as a command.
 ## Loading a file in `utop`
 
 When you want to load a file in `utop` so that you can run the functions inside,
-use the `#use "file name"` directive. For example, if you have a file named
-`fib.ml` with the following contents:
+use the `#use "file name"` directive. For example, if you create a file named
+`example.ml` with the following contents:
 
-```
-let rec fib n = if n <= 2 then 1 else fib (n - 1) + fib (n - 2)
+```ocaml
+let fact n = if n = 0 then 1 else n * fact (n - 1)
 ```
 
-You'd type `#use "example.ml" ;;` on `utop` to load it, and use it to see that the 7th fibonacci number is 13 (the
-`utop# ` part is the prompt, you wouldn't type that):
+You'd type `#use "example.ml" ;;` on `utop` to load it, and use it to see that
+the 6! = 720 (the `utop# ` part is the prompt, you wouldn't
+type that):
 
 ```
 ─( 03:47:07 )─< command 0 >──────────────────────────────────────{ counter: 0 }─
-utop # #use "fib.ml";;
-val fib : int -> int = <fun>
+utop # #use "example.ml";;
+val fact : int -> int = <fun>
 ─( 03:47:07 )─< command 1 >──────────────────────────────────────{ counter: 0 }─
-utop # fib 7;;
-- : int = 13
+utop # fact 6;;
+- : int = 720
 ```
 
 ## Installing `dune` and other packages we need
@@ -209,4 +224,32 @@ fib 3 = 2
 fib 5 = 5
 > 12
 fib 12 = 144
+```
+
+### Using `dune` and `utop` together
+
+**This information will pay off well in the course later on.**
+
+Finally, if you want to use `utop` with the definitions in the current project,
+you can use `dune utop`, then you don't need to load a file with `#use`.  This
+is especially useful when we have projects with multiple modules later in class.
+
+Here is an example session where we open the `Setup` module (which is defined in
+`setup.ml`) and run the `fib` function with some arguments:
+
+```
+────────┬──────────────────────────────────────────────────────────────┬────────
+        │ Welcome to utop version 2.10.0 (using OCaml version 4.14.0)! │
+        └──────────────────────────────────────────────────────────────┘
+
+Type #utop_help for help about using utop.
+
+─( 04:57:54 )─< command 0 >──────────────────────────────────────{ counter: 0 }─
+utop # open Setup ;;
+─( 04:57:54 )─< command 1 >──────────────────────────────────────{ counter: 0 }─
+utop # fib 1 ;;
+- : int = 1
+─( 04:57:57 )─< command 2 >──────────────────────────────────────{ counter: 0 }─
+utop # fib 6 ;;
+- : int = 8
 ```
