@@ -1,0 +1,22 @@
+; Build configuration
+
+; Treat warnings as non-fatal
+(env
+ (dev
+  (flags (:standard -warn-error -A))))
+
+(library
+ (name setup)
+ (modules setup)
+ (wrapped false))
+
+(executable
+ (name frepl)
+ (modules frepl)
+ (libraries setup linenoise)
+ (modes exe))
+
+(test
+ (name test)
+ (libraries setup alcotest)
+ (modules test))
