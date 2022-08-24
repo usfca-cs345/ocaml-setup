@@ -98,7 +98,7 @@ After the command above is done, you need to tell your shell where OCaml is
 again:
 
 ```
-eval `opam env`
+eval $(opam env)
 ```
 
 At this point, if everything went well, when you type `ocaml`, you should see a
