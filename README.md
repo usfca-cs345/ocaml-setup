@@ -10,7 +10,9 @@ project. There are two options for installing OCaml covered here:
 
 OCaml is already installed on the lab computers. You only need to add these two
 lines to the `.bash_profile` file on your home directory (or `.zshrc` if you use
-zsh, if you are not sure you are not using zsh):
+zsh, if you are not sure you are not using zsh, you are probably using bash on
+Linux and zsh on Mac. To be sure, you can run `echo $ZSH_NAME`, it prints `zsh`
+on zsh, and an empty line on bash):
 
 ```
 export OPAMROOT=/usr/local/opam
