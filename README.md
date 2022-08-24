@@ -198,6 +198,10 @@ Full test results in `~/lab/ocaml-setup/_build/default/_build/_tests/setup'.
 Test Successful in 0.002s. 9 tests run.
 ```
 
+If you run `dune build` or `dune test` without changing the files, dune will
+not print anything (if everything compiled and passed all tests): dune checks
+if any files are changed, and runs & builds only what has changed.
+
 Finally, you should be able to run the REPL in this repo (it is in `frepl.ml`
 and computes fib(n) for a given n). To run it, we will use `dune exec` which
 runs an executable (after building it if needed):
