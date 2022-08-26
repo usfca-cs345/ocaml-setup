@@ -164,6 +164,9 @@ opam install dune linenoise alcotest
 
 ## Testing if `dune` works
 
+**You need to follow the rest of this after cloning the repository, and when
+you are in the repository directory.**
+
 After you installed `dune`, you can build the code in this repository with `dune
 build`:
 
